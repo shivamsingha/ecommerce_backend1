@@ -24,6 +24,7 @@ class Passport {
         email: emailphone
       },
       select: {
+        id: true,
         password: true,
         verified: true
       }
@@ -34,6 +35,7 @@ class Passport {
           phone: emailphone
         },
         select: {
+          id: true,
           password: true,
           verified: true
         }
@@ -41,7 +43,7 @@ class Passport {
     }
     if (user) {
       if (password == user.password && user.verified)
-        return done(null, emailphone);
+        return done(null, user.id);
       return done(null, false);
     }
     return done(null, false);
