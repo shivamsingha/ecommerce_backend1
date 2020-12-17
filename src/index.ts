@@ -6,7 +6,14 @@ import helmet, { IHelmetConfiguration } from 'helmet';
 import cors, { CorsOptions } from 'cors';
 import morgan from 'morgan';
 import { Passport, passportAuthenticateOptions } from './utils';
-import { item, login, register, verification } from './routes';
+import {
+  adminActions,
+  item,
+  login,
+  register,
+  userActions,
+  verification
+} from './routes';
 
 const csrfCookieOptions: CookieOptions = {
   httpOnly: true,
@@ -65,6 +72,19 @@ app.use('/register', csrfProtection, register);
 app.use('/verify', verification);
 
 app.use('/item', item);
+
+app.use(
+  '/user',
+  csrfProtection,
+  passport.authenticate('jwt', passportAuthenticateOptions),
+  userActions
+);
+app.use(
+  '/admin',
+  csrfProtection,
+  passport.authenticate('jwt', passportAuthenticateOptions),
+  adminActions
+);
 
 app.use(errorHandler);
 app.listen(3000, () => console.log(`Listening on port 3000`));
