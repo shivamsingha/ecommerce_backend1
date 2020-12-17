@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  title       String
+  stock       Int
+  price       Float
+  desc        String?
+  images      String[]
+  noOfRatings Int      @default(0)
+  totalScore  Int      @default(0)
+  Order       Order?   @relation(fields: [orderId], references: [id])
+  orderId     Int?
+  Profile     Profile? @relation(fields: [profileId], references: [id])
+  profileId   Int?
+}
+
+model Order {
+  id             Int      @id @default(autoincrement())
+  placedAt       DateTime @default(now())
+  status         Boolean  @default(false)
+  subTotal       Float
+  shipping       Float    @default(0)
+  couponDiscount Float    @default(0)
+  items          Item[]
+  User           User?    @relation(fields: [userId], references: [id])
+  userId         Int?
+  Profile        Profile? @relation(fields: [profileId], references: [id])
+  profileId      Int?
+}
+
+model Profile {
+  id      Int     @id @default(autoincrement())
+  name    String?
+  address String?
+  Picture String?
+  cart    Item[]
+  orders  Order[]
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int     @unique
+  Admin   Admin[]
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  verified    Boolean       @default(false)
+  phone       String        @unique
+  password    String
+  profile     Profile?
+  EmailVerify EmailVerify[]
+  Order       Order[]
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  phone     String   @unique
+  password  String
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+}
+
+model EmailVerify {
+  id         Int    @id @default(autoincrement())
+  verifyCode String
+  user       User   @relation(fields: [userId], references: [id])
+  userId     Int
+}
