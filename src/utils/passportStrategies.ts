@@ -42,8 +42,22 @@ class Passport {
       });
     }
     if (user) {
-      if (password == user.password && user.verified)
+      if (password == user.password && user.verified) {
+        await prisma.userLog.create({
+          data: {
+            user: {
+              connect: {
+                id: user.id
+              }
+            }
+          }
+        });
         return done(null, user.id);
+      }
+      if (password == user.password && !user.verified)
+        return done(null, false, {
+          message: 'Please verify your email address'
+        });
       return done(null, false);
     }
     return done(null, false);
