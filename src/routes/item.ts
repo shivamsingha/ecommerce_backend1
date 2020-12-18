@@ -8,6 +8,13 @@ router.get('/:itemId', async (req, res) => {
     .findUnique({
       where: {
         id: parseInt(req.params.itemId)
+      },
+      select: {
+        title: true,
+        desc: true,
+        price: true,
+        noOfRatings: true,
+        totalScore: true
       }
     })
     .catch((e) => res.status(500).send(e));
