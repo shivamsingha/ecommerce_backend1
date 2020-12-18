@@ -48,8 +48,17 @@ router.post('/', (req, res) => {
               }
             }
           }
+        },
+        select: {
+          profile: {
+            select: {
+              orders: true
+            }
+          }
         }
-      }).then(()=>res.send())
+      })
+    )
+    .then((orders) => res.send(orders))
     .catch((e) => res.status(500).send(e));
 });
 
