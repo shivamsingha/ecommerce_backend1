@@ -76,3 +76,9 @@ model UserLog {
   loginTime DateTime @default(now())
   userId    Int
 }
+
+model Coupons {
+  id       Int     @id @default(autoincrement())
+  code     String
+  discount Float
+}
