@@ -43,7 +43,7 @@ const passport = new Passport().usePassport();
 const errorHandler: ErrorRequestHandler = (err, _, res, next) => {
   console.log(err);
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
-  res.status(403);
+  res.status(403).send(err);
   res.send();
 };
 

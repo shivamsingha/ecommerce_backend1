@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
           }
         }
       }
-    })
+    }) /*
     .then((cart) =>
       prisma.user.update({
         where: { id: userId },
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
           }
         }
       })
-    )
+    )*/
     .then((orders) => res.send(orders))
     .catch((e) => res.status(500).send(e));
 });

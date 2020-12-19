@@ -10,7 +10,7 @@ function objCon(name: string, address: string) {
   return {};
 }
 
-router.post('/:userId', (req, res) => {
+router.post('/', (req, res) => {
   const userId = req.user as number;
   const { name, address }: { name: string; address: string } = req.body;
   prisma.user
