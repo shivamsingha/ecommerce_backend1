@@ -3,6 +3,7 @@
 ### Coded fully in TypeScript
 --------------
 ## [Link to API Documentation](https://documenter.getpostman.com/view/13920384/TVssj8FR)
+[API Documentation PDF](https://github.com/shivamsingha/algo8ai_backend_task1/blob/master/APIdocs.pdf)
 
 ## Installation and usage
 1. Install nodejs, yarn, postgreSQL.
