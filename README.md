@@ -1,5 +1,4 @@
-# Algo8 backend task
-## Full ecommerce backend
+# Full ecommerce backend
 ### Coded fully in TypeScript
 --------------
 ## [Link to API Documentation](https://documenter.getpostman.com/view/13920384/TVssj8FR)
